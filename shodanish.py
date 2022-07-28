@@ -23,22 +23,6 @@ else:
     def get_hash(content):
         return mmh3.hash(codecs.encode(content, 'base64'))
 
-
-def print_banner():
-    banner = """
-     __ _               _              _____     _     
-    / _\ |__   ___   __| | __ _ _ __   \_   \___| |__  
-    \ \| '_ \ / _ \ / _` |/ _` | '_ \   / /\/ __| '_ \ 
-    _\ \ | | | (_) | (_| | (_| | | | /\/ /_ \__ \ | | |
-    \__/_| |_|\___/ \__,_|\__,_|_| |_\____/ |___/_| |_|
-                                                                                                                                                      
-    """
-
-    print(banner)
-    print("\t\tShodan Favicon MurmurHash Converter")
-    print("\t\tCoded with <3 By Aziz Hakim @eternyle\n")
-
-
 def get_target(unprocessed_target):
     if unprocessed_target.startswith('http'):
         if unprocessed_target.endswith('favicon.ico'):
@@ -63,13 +47,10 @@ def run(arguments):
 
     var = requests.get(target, verify=False)
     shodan_img_hash = get_hash(var.content)
-    print("\nShodan Dork : http.favicon.hash:%s" % shodan_img_hash)
-    print("\nVisit this URL : https://www.shodan.io/search?query=http.favicon.hash:%s" % shodan_img_hash)
-    print("\n\t\t\tHave a nice day 1337")
+    print("\nhttp.favicon.hash:%s" % shodan_img_hash)
 
 
 if __name__ == '__main__':
-    print_banner()
     parser = argparse.ArgumentParser()
     parser.add_argument('--url', type=str, required=False, help='The url of the favicon to process')
     args = parser.parse_args()
